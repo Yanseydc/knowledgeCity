@@ -1,4 +1,4 @@
-<?php include 'layouts/default_header.html' ?>
+<?php include 'layouts/default_header.html' ?>    
     <form id="login-form">
         <div class="form-group">            
             <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Username">            

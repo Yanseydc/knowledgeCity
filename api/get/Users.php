@@ -2,7 +2,7 @@
     header('Access-Control-Allow-Origin: *');
     header('Content-Type: application/json');    
 
-    //unauthorized user
+    // //unauthorized user
     session_start();
     if(!isset($_SESSION["username"]) || $_SESSION["username"] == null || $_SESSION['username'] == ""){
         echo json_encode(
@@ -17,19 +17,32 @@
 
     include_once "../../config/DataBase.php";
     include_once "../../controller/Users.php";
-
+    
+    $pageNo = 0;
+    
     //make DB instance 
     $database = new DataBase();
     $db = $database->connect();
 
     //make auth instance
     $users = new Users($db);
-            
-    //read users
-    $result = $users->read();
+    
+    //if page number variable is define, then i will make db pagination
+    // if(isset($_GET['pageNo'])) {
+    //     $result = $users->paginate($_GET['pageNo']);
+    
+    //read users from database
+    $result = $users->read();    
 
     //get row count
     $num = $result->rowCount();
+    
+    if(isset($_GET['pageNo'])) {
+        $records_per_page = 5;
+        $total_pages = ceil($num/$records_per_page);        
+        $result = $users->paginate($_GET['pageNo'], $records_per_page);        
+        $num = $result->rowCount();
+    }
 
     //check if user was found
     if( $num > 0 ) {
@@ -47,13 +60,25 @@
             array_push($users_arr, $user_items);
         }
         
-        //parse to JSON
-        echo json_encode(
-            array(
-                "status" => 200,
-                "data" => $users_arr
-            )
-        );
+        if( isset($_GET['pageNo']) ) {
+            //parse to JSON
+            echo json_encode(
+                array(
+                    "status" => 200,
+                    "data" => $users_arr,
+                    "pageNo" => $_GET['pageNo'],
+                    "totalPages" => $total_pages
+                )
+            );
+        } else {
+             //parse to JSON
+             echo json_encode(
+                array(
+                    "status" => 200,
+                    "data" => $users_arr
+                )
+            );
+        }
 
     } else {
         //no users
