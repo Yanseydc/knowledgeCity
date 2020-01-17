@@ -26,5 +26,21 @@
 
             return $stmt;
         }
+
+        public function paginate($pageNo, $records_per_page) {
+
+            $offset = $pageNo * $records_per_page;
+
+            //build query, LIMIT clause that is used to specify the number of records to return.
+            $query = "SELECT * FROM $this->table LIMIT $offset, $records_per_page";
+
+            //prepare statement
+            $stmt = $this->conn->prepare($query);
+
+            //execute query
+            $stmt->execute();
+
+            return $stmt;
+        }
     }
 ?>
