@@ -8,8 +8,9 @@ Testing Project
 To download the webserver in a easy installation just use this link [XAMPP](https://www.apachefriends.org/download.html). And download the installer compatible with your OS.
 
 ## Downloading the project
-To clone the project go to the path ***C:\xampp\htdocs***, then you can clone the project there.
+To clone the project go to the path ***C:\xampp\htdocs***, then you can clone the project there. Make sure to use the Development branch, because right now that is the base project.
 
+Make sure to have internet connection, 'cause at the moment I'm using some CDN's (jquery and bootstrap)
 ## Usage 
 To start apache and mysql services, you will hace a control panel for both, so just find the xampp control panel in your computer, and start the apache and mysql service.
 
