@@ -12,8 +12,7 @@
 
     // set the expiration date to one hour ago
     $session_lifetime = time() - 3600;
-    ini_set('session.cookie_lifetime', $session_lifetime);
-    ini_set('session.gc_maxlifetime', $session_lifetime); 
+    setcookie("uniqid", "", $session_lifetime, "/");
     
     echo json_encode( 
         array(

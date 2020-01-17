@@ -4,15 +4,18 @@
 
     // //unauthorized user
     session_start();
+    
     if(!isset($_SESSION["username"]) || $_SESSION["username"] == null || $_SESSION['username'] == ""){
-        echo json_encode(
-            array(
-                "status" => 401,
-                "message" => "Unauthorized user"
-            )
-        );
-        die();
+        if(!isset($_COOKIE['uniqid'])) {
+            echo json_encode(
+                array(
+                    "status" => 401,
+                    "message" => "Unauthorized user"
+                )
+            );        
+        }
     }
+    
 
 
     include_once "../../config/DataBase.php";

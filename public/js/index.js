@@ -8,7 +8,7 @@ $(document).ready(function(){
 function initSelectors() {
     $("#login-btn").on("click", handleLogIn);
     $("#logout-btn").on("click", handleLogOut);
-
+    $("#alert-message").hide();
     //if url is list get all the list of users
     //The pop() method removes the last element of an array, and returns that element.
     if(window.location.href.split("/").pop() == "list.php") { 
@@ -102,7 +102,14 @@ function handlePreviousEvent() {
 
 function handleLogInResponse(data, textStatus, jqXHR) {     
     if(data.status != 200) {
-        //TODO Error messages
+        //show error message        
+        $("#alert-message").fadeIn();
+        $("#alert-message").html(data.message);
+        //hide error message after 5 seconds
+        setTimeout(function() {
+            $("#alert-message").fadeOut();
+            $("#alert-message").html("");
+        }, 5000)
     } else {
         window.location = "list.php"
     }
@@ -110,7 +117,14 @@ function handleLogInResponse(data, textStatus, jqXHR) {
 
 function handleLogOutResponse(data, textStatus, jqXHR) {    
     if(data.status != 200) {
-        //TODO Error messages
+        //show error message
+        $("#alert-message").fadeIn();
+        $("#alert-message").html(data.message);
+        //hide error message after 5 seconds
+        setTimeout(function() {
+            $("#alert-message").fadeOut();
+            $("#alert-message").html("");
+        }, 5000);        
     } else {
         window.location = "login.php"
     }
@@ -181,10 +195,19 @@ function addEventsToPagination() {
     $("#next").on("click", handleNextEvent);
     $("#previous").on("click", handlePreviousEvent);
 }
+
 function closeAllNotifications() {
 
 }
 
+function showErrorMessage(message) {
+    
+}
+
+
+/*
+*
+*/
 function ajaxCall(object, action) {	
 	console.log('ajax call');
 	$.ajax(object)

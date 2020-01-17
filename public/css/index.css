@@ -1,0 +1,54 @@
+body {
+    background-color: #f7f5f7;
+}
+
+/*inputs*/
+input[type=text], [type=password] {
+    border-radius: 30px;    
+    padding-left: 40px;    
+    /* border-color: gray; */
+}
+
+input[type=text] {
+    background: url("../images/user.svg") no-repeat scroll 5px 1px;
+}
+
+input[type=password] {
+    background: url("../images/password.svg") no-repeat scroll 5px 1px;
+}
+/*buttons*/
+button.login {
+    background-color:#e78b42;
+    color: white;
+    font-weight: bold;
+    border-radius: 20px;
+}
+
+button.logout {
+    background-color:#f2f2f2;    
+    font-weight: bold;    
+}
+
+/*tables*/
+table#users-table {
+    border-style:solid solid solid solid;
+    border-width: 20px 1px 1px 1px;
+    border-color: #e78b42 #f2f2f2 #f2f2f2 #f2f2f2;    
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(odd) {
+    background-color: white;
+}
+
+/*footer*/
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;        
+    text-align: center;
+ }
