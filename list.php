@@ -1,14 +1,24 @@
-<?php
-    session_start();        
+<?php    
+    session_start();          
     if(!isset($_SESSION["username"]) || $_SESSION["username"] == null || $_SESSION["username"] == "") {
-        header("Location: login.php");
+      if(!isset($_COOKIE['uuid'])) {  
+          header("Location: login.php");
+      }
     }
 ?>
 <?php include 'layouts/default_header.html' ?>
-  <h1> User List </h1>
-  <table class="table" id="users-table"></table>
-  <nav aria-label="Page navigation example">
-    <ul class="pagination" id="page-list"></ul>
-  </nav>
-  <button class="btn btn-secondary" id="logout-btn"> log out </button>
+<div class="row">
+    <div class="col col-md-10 mx-auto">
+      <h1 class="display-4 text-center" > User List </h1>
+      <table class="table" id="users-table"></table>
+      <div class="d-flex justify-content-center">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination" id="page-list"></ul>
+        </nav>
+      </div>      
+  </div>
+</div>  
 <?php include 'layouts/default_footer.html' ?>
+<div class="footer">
+  <button class="btn logout btn-block" id="logout-btn">Log Out</button>      
+</div>

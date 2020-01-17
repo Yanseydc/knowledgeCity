@@ -25,18 +25,16 @@
 
     //check if user was found
     if( $num > 0 ) {
-                
-        //if checked is true, keep session alive
-        if(isset($_POST['isChecked']) && $_POST['isChecked'] == 'true') {                        
-            $session_lifetime = 3600; // 1 hour
-            // server should keep session data for AT LEAST 1 hour
-            ini_set('session.cookie_lifetime', $session_lifetime);
-            ini_set('session.gc_maxlifetime', $session_lifetime);                    
-        }
         //start session 
         session_start();
         $_SESSION['username'] = $auth->username;
-        
+
+        //if checked is true, keep session alive
+        if(isset($_POST['isChecked']) && $_POST['isChecked'] == 'true') {                        
+            $session_lifetime =  time() + 3600; // 1 hour                                    
+            setcookie("uniqid", uniqid(), $session_lifetime, "/");  
+        }
+                
         // //parse to JSON
         echo json_encode(
             array(
@@ -49,7 +47,7 @@
         echo json_encode(
             array(
                 "status" => 404,
-                "message" => "user not found"
+                "message" => "Incorrect Username or Password"
             )
         );
     }
